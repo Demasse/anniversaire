@@ -105,6 +105,21 @@
             }
         }
 
+        /* Bouton musique */
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+
         @media(max-width:768px) {
             .slider-container {
                 flex-direction: column;
@@ -127,6 +142,8 @@
 </head>
 
 <body>
+
+    <button id="musicBtn" class="music-btn">🔊 Musique</button>
 
     <div class="slider-container">
 
@@ -153,9 +170,18 @@
                 <img src="image3.jpg">
             </div>
 
+            <div class="thumbnail" data-img="image3.jpg" data-text="Que cette nouvelle année soit remplie de bonheur 🎂✨">
+                <img src="image4.jpg">
+            </div>
+       
+            <div class="thumbnail" data-img="image3.jpg" data-text="Que cette nouvelle année soit remplie de bonheur 🎂✨">
+                <img src="image5.jpg">
+            </div>
+
+
             <div class="thumbnail" data-img="image4.jpg"
                 data-text="Google & Isco, les jumeaux les plus cools du monde 😎🔥">
-                <img src="image4.jpg">
+                <img src="image6.jpg">
             </div>
         </div>
 
@@ -170,6 +196,7 @@
         const mainImage = document.getElementById("mainImage");
         const mainText = document.getElementById("mainText");
         const music = document.getElementById("bgMusic");
+        const musicBtn = document.getElementById("musicBtn");
 
         let currentIndex = 0;
         let autoSlideInterval;
@@ -178,11 +205,15 @@
         const startTime = 17; // 0:17
         const endTime = 56;   // 0:56
 
+        // Essayer autoplay au chargement
         window.addEventListener("load", () => {
             music.currentTime = startTime;
-            music.play().catch(() => {
-                console.log("Autoplay bloqué par le navigateur.");
-            });
+            const playPromise = music.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    console.log("Autoplay bloqué. Utilisez le bouton 🔊");
+                });
+            }
         });
 
         // Boucle entre 17s et 56s
@@ -193,6 +224,19 @@
             }
         });
 
+        // Bouton musique
+        musicBtn.addEventListener("click", () => {
+            if (music.paused) {
+                music.currentTime = startTime;
+                music.play();
+                musicBtn.textContent = "🔇 Stop";
+            } else {
+                music.pause();
+                musicBtn.textContent = "🔊 Musique";
+            }
+        });
+
+        // Slider fonction
         function changeSlide(index) {
             thumbnails.forEach(t => t.classList.remove("active"));
             thumbnails[index].classList.add("active");
@@ -214,6 +258,7 @@
             currentIndex = index;
         }
 
+        // Auto slide
         function startAutoSlide() {
             autoSlideInterval = setInterval(() => {
                 let nextIndex = (currentIndex + 1) % thumbnails.length;
