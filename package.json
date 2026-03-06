@@ -1,9 +1,11 @@
 {
   "name": "anniv",
   "version": "1.0.0",
-  "description": "",
+  "description": "Site anniversaire HTML CSS JS",
   "main": "index.js",
   "scripts": {
+    "build": "echo Build du projet terminé",
+    "start": "echo Lancement du projet",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,7 +13,7 @@
     "url": "git+https://github.com/Demasse/anniversaire.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dimas",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
