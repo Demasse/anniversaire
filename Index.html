@@ -145,45 +145,47 @@
 
     <button id="musicBtn" class="music-btn">🔊 Musique</button>
 
-<div class="slider-container">
+    <div class="slider-container">
 
-    <div class="main-slide">
-        <img id="mainImage" src="image1.jpg">
-        <div class="slide-text show" id="mainText">
-            Joyeux anniversaire Google & Isco ❤️ Vous êtes des jumeaux extraordinaires !
+        <div class="main-slide">
+            <img id="mainImage" src="image/image1.jpg">
+            <div class="slide-text show" id="mainText">
+                Joyeux anniversaire Google & Isco ❤️ Vous êtes des jumeaux extraordinaires !
+            </div>
         </div>
+
+        <div class="thumbnails">
+            <div class="thumbnail active" data-img="image/image1.jpg"
+                data-text="Joyeux anniversaire Google & Isco ❤️ Vous êtes des jumeaux extraordinaires !">
+                <img src="image/image1.jpg">
+            </div>
+
+            <div class="thumbnail" data-img="image/image2.jpg"
+                data-text="Deux cœurs, une seule âme 💫 Que votre complicité dure toujours !">
+                <img src="image/image2.jpg">
+            </div>
+
+            <div class="thumbnail" data-img="image/tt.jpg"
+                data-text="Que cette nouvelle année soit remplie de bonheur et de sourires 🎂✨">
+                <img src="image/tt.jpg">
+            </div>
+
+            <div class="thumbnail" data-img="image/yy.jpg" data-text="Continuez à rêver grand et à viser les étoiles ✨🌟">
+                <img src="image/yy.jpg">
+            </div>
+
+            <div class="thumbnail" data-img="image/image3.jpg" data-text="Restez toujours unis et partagez chaque moment 💖">
+                <img src="image/image3.jpg">
+            </div>
+
+            <div class="thumbnail" data-img="image/image4.jpg"
+                data-text="Soyez toujours forts malgré les hauts et les bas 💪">
+                <img src="image/image6.jpg">
+            </div>
+        </div>
+
     </div>
 
-    <div class="thumbnails">
-        <div class="thumbnail active" data-img="image1.jpg"
-            data-text="Joyeux anniversaire Google & Isco ❤️ Vous êtes des jumeaux extraordinaires !">
-            <img src="image1.jpg">
-        </div>
-
-        <div class="thumbnail" data-img="image2.jpg"
-            data-text="Deux cœurs, une seule âme 💫 Que votre complicité dure toujours !">
-            <img src="image2.jpg">
-        </div>
-
-        <div class="thumbnail" data-img="tt.jpg"
-            data-text="Que cette nouvelle année soit remplie de bonheur et de sourires 🎂✨">
-            <img src="tt.jpg">
-        </div>
-
-        <div class="thumbnail" data-img="yy.jpg" data-text="Continuez à rêver grand et à viser les étoiles ✨🌟">
-            <img src="yy.jpg">
-        </div>
-
-        <div class="thumbnail" data-img="image3.jpg" data-text="Restez toujours unis et partagez chaque moment 💖">
-            <img src="image3.jpg">
-        </div>
-
-        <div class="thumbnail" data-img="image4.jpg" data-text="Soyez toujours forts malgré les hauts et les bas 💪">
-            <img src="image6.jpg">
-        </div>
-    </div>
-
-</div>
     <audio id="bgMusic">
         <source src="music.mp3" type="audio/mpeg">
     </audio>
@@ -232,6 +234,15 @@
                 musicBtn.textContent = "🔊 Musique";
             }
         });
+
+        // Mobile: première interaction démarre la musique
+        window.addEventListener("click", () => {
+            if (music.paused) {
+                music.currentTime = startTime;
+                music.play();
+                musicBtn.textContent = "🔇 Stop";
+            }
+        }, { once: true });
 
         // Slider fonction
         function changeSlide(index) {
